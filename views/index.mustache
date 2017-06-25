@@ -13,17 +13,20 @@
     <div class="mainWrapper">
         <div class="game">
             <h1>Guess The Word</h1>
-            <form action="/" method="POST">
-                <input type="text" name="guessedLetter" class="lowerCase">
-                <input type="submit" value="SUBMIT">
-            </form>
             <p class="randomWord">{{computerWord}}</p>
-            <p>Guesses Left: {{guessCount}}</p>
+            <p class="subTitle"> Enter Your Guess Below</p>
+            <form class="mainForm" action="/" method="POST">
+                <input type="text" name="guessedLetter" class="guess" maxlength="1">
+                <br>
+                <input type="submit" class="submit" value="SUBMIT">
+            </form>
+            <p>You have {{guessCount}} guesses</p>
             <p>Guessed Letters: {{userGuess}}</p>
         </div>
         <p class="error">{{errorMessage}}</p>
         <form action="/error" method="POST">
-            <span id="confirm" class="hidden"><input type = "submit" value="GOT IT"></span>
+            <span id="confirm" class="hidden"><input type = "submit" value="GOT IT" class="gotIt"></span>
+            <img class="mainGif" src="https://media.giphy.com/media/SabSYEpsVh0di/giphy.gif" alt="dancing gif">
         </form>
     </div>
 
