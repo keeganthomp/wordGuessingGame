@@ -11,6 +11,29 @@ const words = fs
   .readFileSync("/usr/share/dict/words", "utf-8")
   .toLowerCase()
   .split("\n");
+var randomWord = words[Math.floor(Math.random() * words.length)];
+console.log("randomWord", randomWord);
+var randomWordArray = randomWord.split("");
+var dashedArray = [];
+var guessedLetter = "";
+var userGuesses = [];
+var errorMessage = "";
+createDashedArray();
+
+function createDashedArray() {
+  for (i = 0; i < randomWordArray.length; i++) {
+    dashedArray.push("_");
+  }
+  // dashedArray = dashedArray.join("  ");
+}
+
+function replaceDashWithLetter(letter) {
+  for (let i = 0; i < randomWord.length; i++) {
+    if (randomWord[i] == letter) {
+      dashedArray[i] = letter;
+    }
+  }
+}
 
 //set view engine
 app.engine("mustache", mustachExpress());
@@ -23,52 +46,63 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session(sessionConfig));
 
 app.get("/", function(req, res) {
-  var randomWord = words[Math.floor(Math.random() * words.length)];
-  console.log("randomWord", randomWord);
-  var randomWordArray = randomWord.split("");
-  var dashedArray = [];
-  var guessedLetter = "";
-  for (i = 0; i < randomWordArray.length; i++) {
-    randomWordArray[i] = "_";
-    dashedArray.push(randomWordArray[i]);
+  if (randomWordArray.toString() === dashedArray.toString()) {
+    return res.render("winner", {randomWord: randomWord});
   }
-
   res.render("index", {
     computerWord: dashedArray,
     guessedLetter: guessedLetter,
-    guessCount: guessCount
+    guessCount: guessCount,
+    userGuess: userGuesses,
+    errorMessage: errorMessage,
+    randomWord: randomWord
   });
 });
 
+var guessCount = 8;
+
 app.post("/", function(req, res) {
-  var guessCount = 8;
+  console.log("random-word:", randomWord);
   userGuess = req.body;
-  if (
-    userGuess.guessedLetter.length > 1 ||
-    userGuess.guessedLetter.length <= 0
-  ) {
-    return res.redirect("/");
-  } else if (randomWord.indexOf(userGuess.guessedLetter >= 0)) {
-    guessedLetter = userGuess.guessedLetter;
-    for (let i = 0; i < randomWord.length; i++) {
-      if (randomWord[i] == letter) {
-        dashedArray[i] = letter;
+  if (randomWord.indexOf(userGuess.guessedLetter) >= 0) {
+    guessedLetter = userGuess.guessedLetter.toLowerCase();
+    for (let i = 0; i < randomWordArray.length; i++) {
+      if (randomWordArray[i] == guessedLetter) {
+        dashedArray[i] = guessedLetter;
+        userGuesses.push(userGuess.guessedLetter);
       }
     }
     guessCount -= 1;
-    console.log("guess counter:", guessCount);
-    if (guessCount <= 0) {
-      guessCount = 8;
-      return res.render("index");
-    }
+  } else if (userGuess.guessedLetter === null) {
+    res.redirect("/");
+  } else if (
+    userGuess.guessedLetter.length > 1 ||
+    userGuess.guessedLetter.length <= 0 ||
+    userGuess.guessedLetter.indexOf(" ") >= 0
+  ) {
+    console.log("too many");
+    errorMessage = "You may only guess one letter at a time and no spaces";
     return res.redirect("/");
-  } else if (computerWord.indexOf("_") == -1) {
-    res.redirect("/winner");
+  } else if (userGuesses.indexOf(userGuess.guessedLetter) >= 0) {
+    console.log("Already guessed it");
+    errorMessage =
+      "You already guessed '" +
+      userGuess.guessedLetter +
+      "', guess a different letter";
+  } else if ((userGuess.guessedLetter.length = 1)) {
+    guessCount -= 1;
+    userGuesses.push(userGuess.guessedLetter);
+  } else if (guessCount <= 0) {
+    guessCount = 8;
+    return res.redirect("/");
   }
+
+  res.redirect("/");
 });
 
-app.get("/winner", function(req, res) {
-  res.render("winner");
+app.post("/error", function(req, res) {
+  errorMessage = "";
+  res.redirect("/");
 });
 
 app.listen(port, function() {

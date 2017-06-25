@@ -11,13 +11,20 @@
 <body>
 
     <div class="mainWrapper">
-        <h1>Guess The Word</h1>
-        <form action="/" method="POST">
-            <input type="text" name="guessedLetter">
-            <input type="submit" value="SUBMIT">
+        <div class="game">
+            <h1>Guess The Word</h1>
+            <form action="/" method="POST">
+                <input type="text" name="guessedLetter" class="lowerCase">
+                <input type="submit" value="SUBMIT">
+            </form>
+            <p class="randomWord">{{computerWord}}</p>
+            <p>Guesses Left: {{guessCount}}</p>
+            <p>Guessed Letters: {{userGuess}}</p>
+        </div>
+        <p class="error">{{errorMessage}}</p>
+        <form action="/error" method="POST">
+            <span id="confirm" class="hidden"><input type = "submit" value="GOT IT"></span>
         </form>
-        <p>{{computerWord}}</p>
-        <p>Guesses Left: {{guessCount}}</p>
     </div>
 
     <script src="main.js"></script>
