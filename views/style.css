@@ -75,3 +75,8 @@ body {
   cursor: pointer;
   width: 40%;
 }
+
+
+.upperCase {
+  text-transform: uppercase;
+}

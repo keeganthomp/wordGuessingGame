@@ -91,7 +91,8 @@ app.post("/", function(req, res) {
   }
   if (guessCount <= 0) {
     guessCount = 8;
-    return res.render("fail", { randomWord: randomWord });
+    errorMessage = "You ran out of guesses."
+    return res.render("fail", { randomWord: randomWord, errorMessage: errorMessage });
   }
 
   res.redirect("/");
