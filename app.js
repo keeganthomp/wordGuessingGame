@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const mustachExpress = require("mustache-express");
 const fs = require("fs");
-const port = process.env.PORT || 9000;
+const port = process.env.PORT || 4000;
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const sessionConfig = require("./sessionConfig");
@@ -91,8 +91,11 @@ app.post("/", function(req, res) {
   }
   if (guessCount <= 0) {
     guessCount = 8;
-    errorMessage = "You ran out of guesses."
-    return res.render("fail", { randomWord: randomWord, errorMessage: errorMessage });
+    errorMessage = "You ran out of guesses.";
+    return res.render("fail", {
+      randomWord: randomWord,
+      errorMessage: errorMessage
+    });
   }
 
   res.redirect("/");
@@ -106,3 +109,4 @@ app.post("/error", function(req, res) {
 app.listen(port, function() {
   console.log("Application is running on", port);
 });
+

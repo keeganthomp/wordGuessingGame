@@ -13,9 +13,12 @@
     <div class="mainWrapper">
         <h1>You Lost</h1>
         <p>{{errorMessage}}</p>
-        <p class="word">The word was: <span class="upperCase">{{randomWord}}</span></p>
-           <img src="http://cdn.list25.com/wp-content/uploads/2015/01/failgif7.gif" alt="dancing gif">
+        <p class="word">The word was: <span class="upperCase">{{randomWord}}</span></p>   
+            <img src="http://cdn.list25.com/wp-content/uploads/2015/01/failgif7.gif" alt="dancing gif">
     </div>
+    <form action="/error" method="POST">
+            <span id="confirm"><input type = "submit" value="PLAY AGAIN" class="gotIt"></span>
+        </form>
 
     <script src="main.js"></script>
 </body>
