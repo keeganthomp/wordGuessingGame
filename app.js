@@ -101,12 +101,23 @@ app.post("/", function(req, res) {
   res.redirect("/");
 });
 
-app.post("/error", function(req, res) {
+app.post("/again", function(req, res) {
+  randomWord = words[Math.floor(Math.random() * words.length)];
+  randomWordArray = randomWord.split("");
+  dashedArray = [];
+  guessedLetter = "";
+  userGuesses = [];
   errorMessage = "";
+  guessCount = 8;
+  createDashedArray();
   res.redirect("/");
 });
+
+app.post("/error", function(req, res){
+  errorMessage = "";
+  res.redirect("/");  
+})
 
 app.listen(port, function() {
   console.log("Application is running on", port);
 });
-

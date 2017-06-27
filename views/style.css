@@ -66,6 +66,7 @@ body {
   transition: all 1s;
   width: 40%;
   height: 3rem;  
+  margin: 0 auto;
 }
 
 .gotIt:hover {
@@ -79,4 +80,8 @@ body {
 
 .upperCase {
   text-transform: uppercase;
+}
+
+.failForm {
+  margin: 0 auto;
 }
