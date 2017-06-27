@@ -17,11 +17,13 @@ entryRouts.get("/", function(req, res) {
     guessCount: data.guessCount,
     userGuess: data.userGuesses,
     errorMessage: data.errorMessage,
-    randomWord: data.randomWord
+    randomWord: data.randomWord,
+    guessCount: guessCount
   });
 });
 
-var guessCount = 8;
+  var guessCount = 8;
+
 
 entryRouts.post("/", function(req, res) {
   userGuess = req.body;
@@ -29,7 +31,7 @@ entryRouts.post("/", function(req, res) {
   if (data.userGuesses.indexOf(userGuess.guessedLetter) >= 0) {
     data.errorMessage =
       "You already guessed '" +
-      data.userGuess.guessedLetter +
+      userGuess.guessedLetter +
       "', guess a different letter";
   } else if (data.randomWord.indexOf(userGuess.guessedLetter) >= 0) {
     guessedLetter = userGuess.guessedLetter;
