@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Mrs+Sheppards" rel="stylesheet">
 </head>
 
 <body>
@@ -20,8 +21,8 @@
                 <br>
                 <input type="submit" class="submit" value="SUBMIT">
             </form>
-            <p>You have {{guessCount}} guesses</p>
-            <p>Guessed Letters: {{userGuess}}</p>
+            <p>You have <span class="guessCount">{{guessCount}}</span> guesses</p>
+            <p>Guessed Letters:<span class="guessCount"> {{userGuess}}</span></p>
         </div>
         <p class="error">{{errorMessage}}</p>
         <form action="/error" method="POST">

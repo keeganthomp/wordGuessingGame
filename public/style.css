@@ -1,11 +1,25 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background: url('http://www.drodd.com/images14/white-wallpaper13.jpg');
+  color: gray;
+}
+
+h1 {
+  font-family: 'Mrs Sheppards';
+  letter-spacing: 10px;
+  font-size: 4rem;
+  color: gray;
+}
+
+.guessCount {
+  color: lightcoral;
 }
 
 .mainWrapper {
   width: 600px;
   margin: 0 auto;
   text-align: center;
+  -webkit-animation: slide 0.5s forwards;
 }
 
 .hidden {
@@ -14,23 +28,25 @@ body {
 
 .guess {
   text-transform: lowercase;
+  color: lightcoral;
   border: none;
   text-align: center;
   font-size: 2rem;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid lightcoral;
   width: 10%;
   height: 4rem;
+  background: none;
 }
 
 .guess:focus {
   outline: none;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid gray;
 }
 
 .submit {
   -webkit-appearance: none;
   background: none;
-  border: 1px solid black;
+  border: 1px solid gray;
   width: 51%;
   margin-top: 3%;
   height: 2rem;
@@ -39,9 +55,9 @@ body {
 
 .submit:hover {
   cursor: pointer;
-  background: black;
+  background: lightcoral;
   color: white;
-  border: 1px solid black;
+  border: 1px solid gray;
   transition: all 1s;
 }
 
@@ -52,16 +68,19 @@ body {
 .randomWord {
   font-size: 2.3rem;
   letter-spacing: 3%;
+  color: gray;
 }
 
 .error {
-  color: red;
+  color: lightcoral;
   font-size: 3rem;
 }
 
 .gotIt {
   -webkit-appearance: none;
-  border: 1px solid black;
+  border: 1px solid lightcoral;
+  color: lightcoral;
+  font-weight: bold;
   background: none;
   transition: all 1s;
   width: 40%;
@@ -70,7 +89,7 @@ body {
 }
 
 .gotIt:hover {
-  background: black;
+  background: lightblue;
   color: white;
   transition: all 1s;
   cursor: pointer;
