@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 
 
 entryRouts.use(bodyParser.urlencoded({ extended: false }));
+entryRouts.use(bodyParser.json());
+
 
 
 entryRouts.get("/", function(req, res) {
@@ -27,7 +29,7 @@ entryRouts.get("/", function(req, res) {
 
 entryRouts.post("/", function(req, res) {
   userGuess = req.body;
-  console.log("req Body:", req.body);
+  console.log("req Body LETTTERERERRRRR:", req.body);
   if (data.userGuesses.indexOf(userGuess.guessedLetter) >= 0) {
     data.errorMessage =
       "You already guessed '" +

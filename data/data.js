@@ -20,7 +20,7 @@ function createDashedArray() {
   for (i = 0; i < randomWordArray.length; i++) {
     dashedArray.push("_");
   }
-  // dashedArray = dashedArray.join("  ");
+  // dashedArray = dashedArray.join("");
 }
 
 function replaceDashWithLetter(letter) {

@@ -11,9 +11,9 @@ playAgain.post("/", function(req, res) {
   data.userGuesses = [];
   data.errorMessage = "";
   data.guessCount = 8;
-  data.createDashedArray();
   res.redirect("/");
 });
+
 
 
 module.exports = playAgain;
